@@ -1,3 +1,9 @@
+name: Upload scripts
+
+on:
+  push:
+    branches:
+      - main
 jobs:
   upload:
     runs-on: ubuntu-latest
