@@ -16,13 +16,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pwd
-          ls
-
           pip install -r scripts/ec2/etl/test-requirements.txt
-          pwd
-          ls
-          cd /scripts/ec2/etl
+          cd scripts/ec2/etl
           python -m unittest -v test-compute.SparkETLTestCase
 
       - name: Run tests with pytest
