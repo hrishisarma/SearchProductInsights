@@ -3,7 +3,7 @@ from pyspark.sql.functions import *
 from pyspark.sql.window import Window
 from pyspark import SparkConf
 import argparse
-import datetime 
+import datetime
 
 class DataPipeline:
 	
@@ -28,12 +28,10 @@ class DataPipeline:
 		window_spec  = Window.partitionBy("Item")
 		df_normal = df_normal.withColumn("PricePerUnitUpdate",max("PricePerUnit").over(window_spec)) # if revenue is updated based on same Item
 
-
 		# df_revenue = df_normal.withColumn("Revenue", df_normal["PricePerUnit"].cast("double")*df_normal["Units"].cast("double"))
 
 		df_revenue = df_normal.withColumn("Revenue", when(df_normal["PricePerUnit"] == "0.0", df_normal["PricePerUnitUpdate"].cast("double")*df_normal["Units"].cast("double"))\
 			.otherwise(df_normal["PricePerUnit"].cast("double")*df_normal["Units"].cast("double")))
-
 
 		window_product_keyword  = Window.partitionBy([col(x) for x in self.column_list])
 		window_spec_product_keyword  = window_product_keyword.orderBy(desc("Revenue"))

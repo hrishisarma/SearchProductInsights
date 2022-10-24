@@ -14,7 +14,7 @@ jobs:
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_bucket: 'adobedataexercise'
-          source_dir: 'scripts/ec2/python'
+          source_dir: 'scripts/ec2/etl'
           destination_dir: 'scripts/revenue_product'
   upload_2:
     runs-on: ubuntu-latest
